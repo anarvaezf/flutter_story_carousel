@@ -1,5 +1,6 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+// lib/story_carousel.dart
+library;
+
+/// Public exports
+export 'src/story_carousel.dart';
+export 'src/story_carousel_controller.dart';
