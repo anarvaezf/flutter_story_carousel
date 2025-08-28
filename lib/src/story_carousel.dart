@@ -2,33 +2,115 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:story_carousel/src/story_carousel_controller.dart';
 
+/// A carousel of "stories" similar to Instagram.
+///
+/// Accepts any list of [Widget]s as pages. Supports auto-play with
+/// per-item durations, tap navigation (left/right), long-press to
+/// pause/resume, and a segmented progress indicator on top.
 class StoryCarousel extends StatefulWidget {
+  /// Creates a [StoryCarousel].
+  ///
+  /// See individual parameter docs for behavior and defaults.
   const StoryCarousel({
     super.key,
+
+    /// Title shown on the top overlay (left side).
     required this.title,
+
+    /// Widgets to be displayed as story pages, in order.
     required this.items,
+
+    /// Optional controller for imperative control (next/prev/pause/resume/goTo).
+    ///
+    /// If not provided, an internal controller is created and disposed automatically.
     this.controller,
+
+    /// Callback invoked whenever the current page index changes.
+    ///
+    /// Receives the new zero-based index.
     this.onIndexChanged,
+
+    /// If provided, a Close button is shown (top-left) and this callback fires when tapped.
     this.onClose,
+
+    /// Whether the carousel should auto-advance items.
+    ///
+    /// Defaults to `true`.
     this.autoPlay = true,
+
+    /// Whether to loop from the last item back to the first.
+    ///
+    /// Defaults to `false`.
     this.loop = false,
+
+    /// Global fallback duration applied when [durations] is null.
+    ///
+    /// Defaults to `Duration(seconds: 5)`.
     this.durationPerItem = const Duration(seconds: 5),
+
+    /// Optional per-item durations. If provided, its length must match [items.length].
+    ///
+    /// When present, these values override [durationPerItem] on a per-item basis.
     this.durations,
+
+    /// Height of the progress bar segments (in logical pixels).
+    ///
+    /// Defaults to `3.0`.
     this.progressBarHeight = 3.0,
+
+    /// Duration of the page change animation.
+    ///
+    /// Exposed mainly for testing/fine tuning. Defaults to `Duration(milliseconds: 220)`.
     this.pageAnimationDuration = const Duration(milliseconds: 220),
   });
 
+  /// Title shown on the top overlay (left side).
   final String title;
+
+  /// Widgets to be displayed as story pages, in order.
   final List<Widget> items;
+
+  /// Optional controller for imperative control (next/prev/pause/resume/goTo).
+  ///
+  /// If not provided, an internal controller is created and disposed automatically.
   final StoryCarouselController? controller;
+
+  /// Callback invoked whenever the current page index changes.
+  ///
+  /// Receives the new zero-based index.
   final ValueChanged<int>? onIndexChanged;
+
+  /// If provided, a Close button is shown (top-left) and this callback fires when tapped.
   final VoidCallback? onClose;
 
+  /// Whether the carousel should auto-advance items.
+  ///
+  /// Defaults to `true`.
   final bool autoPlay;
+
+  /// Whether to loop from the last item back to the first.
+  ///
+  /// Defaults to `false`.
   final bool loop;
+
+  /// Global fallback duration applied when [durations] is null.
+  ///
+  /// Defaults to `Duration(seconds: 5)`.
   final Duration durationPerItem;
+
+  /// Optional per-item durations. If provided, its length must match [items.length].
+  ///
+  /// When present, these values override [durationPerItem] on a per-item basis.
   final List<Duration>? durations;
+
+  /// Height of the progress bar segments (in logical pixels).
+  ///
+  /// Defaults to `3.0`.
   final double progressBarHeight;
+
+  /// Duration of the page change animation.
+  ///
+  /// Exposed mainly for testing/fine tuning. Defaults to `Duration(milliseconds: 220)`.
   final Duration pageAnimationDuration;
 
   @override
@@ -143,8 +225,8 @@ class _StoryCarouselState extends State<StoryCarousel> {
         final widthFactor = isPast
             ? 1.0
             : isCurrent
-            ? _progress
-            : 0.0;
+                ? _progress
+                : 0.0;
         return Expanded(
           child: Container(
             margin: EdgeInsets.only(
