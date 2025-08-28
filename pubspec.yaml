@@ -1,6 +1,6 @@
 name: story_carousel
 description: Instagram-like stories carousel for Flutter with auto-advance, gestures and progress indicators.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/anarvaezf/flutter_story_carousel
 repository: https://github.com/anarvaezf/flutter_story_carousel
 issue_tracker: https://github.com/anarvaezf/flutter_story_carousel/issues

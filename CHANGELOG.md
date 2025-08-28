@@ -1,3 +1,8 @@
+## 0.1.1
+- Fix: pubspec `screenshots` duplicates (light/dark).
+- Docs: add dartdoc to public API.
+- Chore: format code (`dart format .`) and enable `public_member_api_docs`.
+
 ## 0.1.0
 
 - Initial release of `story_carousel`.
